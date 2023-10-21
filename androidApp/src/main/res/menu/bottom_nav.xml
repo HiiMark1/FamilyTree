@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_android_black_24dp"
+        android:title="search" />
+
+    <item
+        android:id="@+id/treeFragment"
+        android:icon="@drawable/baseline_people_24"
+        android:title="tree" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/baseline_person_24"
+        android:title="profile" />
+
+</menu>
