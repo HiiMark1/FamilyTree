@@ -2,25 +2,29 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/profileFragment">
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.myapplication.android.MainFragment"
         android:label="MainFragment" >
         <action
-            android:id="@+id/action_mainFragment_to_profileFragment2"
-            app:destination="@id/profileFragment2" />
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment2"
+        android:id="@+id/profileFragment"
         android:name="com.example.myapplication.android.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/searchFragment2"
+        android:id="@+id/searchFragment"
         android:name="com.example.myapplication.android.SearchFragment"
         android:label="SearchFragment" />
     <fragment
-        android:id="@+id/treeFragment2"
+        android:id="@+id/treeFragment"
         android:name="com.example.myapplication.android.TreeFragment"
         android:label="TreeFragment" />
 </navigation>
