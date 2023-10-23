@@ -14,7 +14,7 @@ class MainFragment: Fragment(R.layout.fragment_main) {
         binding = FragmentMainBinding.bind(view)
 
         binding.button.setOnClickListener{
-            view?.findNavController()?.navigate(R.id.action_mainFragment_to_profileFragment)
+//            view?.findNavController()?.navigate(R.id.action_mainFragment_to_profileFragment)
         }
     }
 }

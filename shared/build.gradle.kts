@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.google.gms.google-services")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -45,4 +46,14 @@ android {
     defaultConfig {
         minSdk = 27
     }
+}
+
+dependencies {
+    implementation("com.google.firebase:firebase-auth:21.0.1")
+    implementation("dev.gitlive:firebase-firestore:1.8.1") // This line
+    implementation("dev.gitlive:firebase-common:1.8.1")// This line
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1") // This line
+    implementation("dev.gitlive:firebase-auth:1.10.0")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-common-ktx:20.3.3")
 }

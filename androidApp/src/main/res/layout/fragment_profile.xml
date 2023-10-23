@@ -5,14 +5,171 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView4"
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_settings"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fragment profile"
-        android:textColor="@color/design_default_color_error"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_settings_24" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textColor="@color/black"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        android:ems="8"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+
+    <TextView
+        android:id="@+id/tv_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        android:gravity="center"
+        android:text="@string/surname"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_info"
+        app:layout_constraintEnd_toEndOf="@+id/tv_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/additional_info"
+        android:textColor="@color/black"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+
+    <TextView
+        android:id="@+id/tv_office"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:text="@string/office_adress"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/black"
+        android:ems="6"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+
+    <TextView
+        android:id="@+id/tv_address_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_office"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_info"
+        app:layout_constraintTop_toTopOf="@+id/tv_office" />
+
+    <TextView
+        android:id="@+id/tv_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/age"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginTop="40dp"
+        android:ems="6"
+        app:layout_constraintStart_toStartOf="@+id/tv_office"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address_user_info" />
+
+    <TextView
+        android:id="@+id/tv_age_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_age"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_info"
+        app:layout_constraintTop_toTopOf="@+id/tv_age" />
+
+    <TextView
+        android:id="@+id/tv_work_weekdays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weekdays_hours"
+        android:ems="6"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_age"
+        app:layout_constraintTop_toBottomOf="@+id/tv_age_user_info" />
+
+    <TextView
+        android:id="@+id/tv_work_weekdays_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:ems="6"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_work_weekdays"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_info"
+        app:layout_constraintTop_toTopOf="@+id/tv_work_weekdays" />
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/exit_from_account"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_work_in_weekend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weekend_hours"
+        android:ems="6"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_work_weekdays"
+        app:layout_constraintTop_toBottomOf="@+id/tv_work_weekdays" />
+
+    <TextView
+        android:id="@+id/tv_work_in_weekend_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:ems="6"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_work_in_weekend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_info"
+        app:layout_constraintTop_toTopOf="@+id/tv_work_in_weekend" />
 </androidx.constraintlayout.widget.ConstraintLayout>
