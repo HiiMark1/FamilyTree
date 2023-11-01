@@ -1,29 +1,26 @@
-package com.example.myapplication.android
+package com.example.myapplication.android.auth.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.myapplication.FirebaseAuthManager
+import com.example.myapplication.android.data.DIContainer
+import com.example.myapplication.android.R
 import com.example.myapplication.android.databinding.FragmentLoginBinding
-import com.example.myapplication.android.login.FirebaseAuthManagerImpl
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var auth: FirebaseAuth
-    private lateinit var authManager: FirebaseAuthManagerImpl
+    private var auth: FirebaseAuth = DIContainer.auth
+    private var authManager: FirebaseAuthManager = DIContainer.firebaseAuthManagerImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        authManager = FirebaseAuthManagerImpl()
-        auth = Firebase.auth
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,6 +55,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun showMessage(msgId: Int) {
+        Snackbar.make(
+            requireView(),
+            msgId,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
+    private fun showMessage(msgId: String) {
         Snackbar.make(
             requireView(),
             msgId,

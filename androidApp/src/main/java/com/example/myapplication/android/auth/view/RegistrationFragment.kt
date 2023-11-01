@@ -1,11 +1,13 @@
-package com.example.myapplication.android
+package com.example.myapplication.android.auth.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.myapplication.FirebaseAuthManager
+import com.example.myapplication.android.data.DIContainer
+import com.example.myapplication.android.R
 import com.example.myapplication.android.databinding.FragmentRegistrationBinding
-import com.example.myapplication.android.login.FirebaseAuthManagerImpl
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -16,7 +18,7 @@ import kotlinx.coroutines.launch
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     private lateinit var binding: FragmentRegistrationBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var authManager: FirebaseAuthManagerImpl
+    private lateinit var authManager: FirebaseAuthManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        authManager = DIContainer.firebaseAuthManagerImpl
         binding = FragmentRegistrationBinding.bind(view)
 
         with(binding) {
@@ -55,7 +58,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                     password
                 )
             } catch (e: Exception) {
-                showMessage(R.string.something_wrong)
+                showMessage(e.toString())
             }
         }
     }
@@ -87,6 +90,14 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     }
 
     private fun showMessage(msgId: Int) {
+        Snackbar.make(
+            requireView(),
+            msgId,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
+    private fun showMessage(msgId: String) {
         Snackbar.make(
             requireView(),
             msgId,

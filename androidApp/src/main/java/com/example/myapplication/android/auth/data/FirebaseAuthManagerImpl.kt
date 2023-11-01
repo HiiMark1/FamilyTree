@@ -1,13 +1,15 @@
-package com.example.myapplication.android.login
+package com.example.myapplication.android.auth.data
 
 import com.example.myapplication.FirebaseAuthManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FirebaseAuthManagerImpl : FirebaseAuthManager {
-    private val auth = Firebase.auth
+class FirebaseAuthManagerImpl(
+    private val auth: FirebaseAuth
+) : FirebaseAuthManager {
 
     override suspend fun signInWithMailAndPassword(email: String, password: String) {
         withContext(Dispatchers.Main) {
@@ -15,16 +17,15 @@ class FirebaseAuthManagerImpl : FirebaseAuthManager {
         }
     }
 
-    override suspend fun signUpWithMailAndPassword(email: String, password: String): String {
+    override suspend fun signUpWithMailAndPassword(email: String, password: String){
         withContext(Dispatchers.Main) {
             auth.createUserWithEmailAndPassword(email, password)
         }
-        return "Eee"
     }
 
     override suspend fun signOut() {
-        TODO("Not yet implemented")
+        withContext(Dispatchers.Main) {
+            auth.signOut()
+        }
     }
-
-
 }

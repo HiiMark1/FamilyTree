@@ -5,11 +5,243 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView3"
+    <ImageView
+        android:id="@+id/iv_main_user"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_father"
+        app:layout_constraintStart_toStartOf="@+id/iv_mother"
+        app:layout_constraintTop_toBottomOf="@+id/tv_father"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_mother"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_father"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_change_view_to_list"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_father"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_mother"
+        app:layout_constraintTop_toTopOf="@+id/iv_mother"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btn_change_view_to_list"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:text="В виде списка"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_info_about_tree"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_add_new_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fragment tree"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:text="Добавить нов. члена семьи"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_info_about_tree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:ems="10"
+        android:text="Информация о древе"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_main_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Это вы"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/iv_main_user"
+        app:layout_constraintStart_toStartOf="@+id/iv_main_user"
+        app:layout_constraintTop_toBottomOf="@+id/iv_main_user" />
+
+    <TextView
+        android:id="@+id/tv_mother"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/iv_mother"
+        app:layout_constraintStart_toStartOf="@+id/iv_mother"
+        app:layout_constraintTop_toBottomOf="@+id/iv_mother" />
+
+    <TextView
+        android:id="@+id/tv_father"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/iv_father"
+        app:layout_constraintStart_toStartOf="@+id/iv_father"
+        app:layout_constraintTop_toBottomOf="@+id/iv_father" />
+
+    <ImageView
+        android:id="@+id/iv_0child"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="64dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/iv_main_user"
+        app:layout_constraintStart_toStartOf="@+id/iv_main_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_info"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_0child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/iv_0child"
+        app:layout_constraintStart_toStartOf="@+id/iv_0child"
+        app:layout_constraintTop_toBottomOf="@+id/iv_0child" />
+
+    <ImageView
+        android:id="@+id/iv_1child_1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_mother"
+        app:layout_constraintStart_toStartOf="@+id/iv_mother"
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_info"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_1child_2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_father"
+        app:layout_constraintStart_toStartOf="@+id/iv_father"
+        app:layout_constraintTop_toTopOf="@+id/iv_1child_1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tv_1child_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/iv_1child_1"
+        app:layout_constraintStart_toStartOf="@+id/iv_1child_1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_1child_1" />
+
+    <TextView
+        android:id="@+id/tv_1child_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/iv_1child_2"
+        app:layout_constraintStart_toStartOf="@+id/iv_1child_2"
+        app:layout_constraintTop_toBottomOf="@+id/iv_1child_2" />
+
+    <View
+        android:id="@+id/vert_line_parents"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/iv_main_user"
+        app:layout_constraintEnd_toEndOf="@id/iv_father"
+        app:layout_constraintStart_toStartOf="@id/iv_mother"
+        app:layout_constraintTop_toTopOf="@id/iv_mother" />
+
+    <View
+        android:id="@+id/horiz_line_parents"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/vert_line_parents"
+        app:layout_constraintEnd_toStartOf="@id/iv_father"
+        app:layout_constraintStart_toEndOf="@id/iv_mother" />
+
+    <View
+        android:id="@+id/vert_line_0childs"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/iv_0child"
+        app:layout_constraintEnd_toEndOf="@id/iv_father"
+        app:layout_constraintStart_toStartOf="@id/iv_mother"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_info" />
+
+    <View
+        android:id="@+id/vert_line_1childs"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="64dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/iv_1child_2"
+        app:layout_constraintEnd_toEndOf="@id/iv_father"
+        app:layout_constraintStart_toStartOf="@id/iv_mother"
+        app:layout_constraintTop_toBottomOf="@id/tv_main_info" />
+
+    <View
+        android:id="@+id/horiz_line_1childs"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/iv_1child_2"
+        app:layout_constraintStart_toEndOf="@id/iv_1child_1"
+        app:layout_constraintTop_toBottomOf="@id/vert_line_1childs" />
+
+    <EditText
+        android:id="@+id/et_enter_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:hint="Введите код семьи"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_accept"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="15"
+        android:text="Подтвердить"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tv_main_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_create_own_tree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="15"
+        android:text="создать своё древо"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

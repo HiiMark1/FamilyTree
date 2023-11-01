@@ -5,36 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_margin="32dp"
+        android:src="@drawable/unknown_person"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <ImageView
-        android:id="@+id/iv_settings"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+
+    <TextView
+        android:id="@+id/tv_sex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_settings_24" />
+        android:text="Пол"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
+        app:layout_constraintStart_toStartOf="@+id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
+        android:ems="12"
+        android:text="Имя"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"
-        android:ems="8"
-        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_surname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
         app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
@@ -43,133 +45,130 @@
         android:id="@+id/tv_surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="8"
-        android:gravity="center"
-        android:text="@string/surname"
+        android:ems="12"
+        android:text="Фамилия"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_info"
-        app:layout_constraintEnd_toEndOf="@+id/tv_name"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_patronymic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
     <TextView
-        android:id="@+id/tv_info"
+        android:id="@+id/tv_patronymic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/additional_info"
+        android:ems="12"
+        android:text="Отчество"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="17sp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_surname" />
+
+    <TextView
+        android:id="@+id/tv_birthday_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Дата рождения: "
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/iv_avatar"
         app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
 
     <TextView
-        android:id="@+id/tv_office"
+        android:id="@+id/tv_location_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:text="@string/office_adress"
         android:layout_marginTop="40dp"
+        android:text="Город: "
         android:textColor="@color/black"
-        android:ems="6"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_birthday_info"
+        app:layout_constraintStart_toStartOf="@+id/tv_birthday_info"
+        app:layout_constraintTop_toBottomOf="@+id/tv_birthday" />
 
     <TextView
-        android:id="@+id/tv_address_user_info"
+        android:id="@+id/tv_birthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="6"
-        android:gravity="center"
+        android:ems="11"
+        android:text="Неизвестно"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_office"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_info"
-        app:layout_constraintTop_toTopOf="@+id/tv_office" />
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/tv_birthday_info" />
 
     <TextView
-        android:id="@+id/tv_age"
+        android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/age"
+        android:ems="11"
+        android:text="Неизвестно"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="17sp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/tv_location_info" />
+
+    <TextView
+        android:id="@+id/tv_actual_location_info"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:ems="6"
-        app:layout_constraintStart_toStartOf="@+id/tv_office"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address_user_info" />
-
-    <TextView
-        android:id="@+id/tv_age_user_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="6"
-        android:gravity="center"
+        android:ems="11"
+        android:text="Нынешнее место проживания:"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_age"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_info"
-        app:layout_constraintTop_toTopOf="@+id/tv_age" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
+        app:layout_constraintStart_toStartOf="@+id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location" />
 
-    <TextView
-        android:id="@+id/tv_work_weekdays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/weekdays_hours"
-        android:ems="6"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_age"
-        app:layout_constraintTop_toBottomOf="@+id/tv_age_user_info" />
-
-    <TextView
-        android:id="@+id/tv_work_weekdays_user_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:ems="6"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_work_weekdays"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_info"
-        app:layout_constraintTop_toTopOf="@+id/tv_work_weekdays" />
 
     <Button
-        android:id="@+id/btn_exit"
+        android:id="@+id/btn_edit_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/exit_from_account"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_work_in_weekend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/weekend_hours"
-        android:ems="6"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_work_weekdays"
-        app:layout_constraintTop_toBottomOf="@+id/tv_work_weekdays" />
-
-    <TextView
-        android:id="@+id/tv_work_in_weekend_user_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:ems="6"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_work_in_weekend"
+        android:layout_marginBottom="16dp"
+        android:ems="16"
+        android:text="Редактировать информацию"
+        app:layout_constraintBottom_toTopOf="@+id/btn_signOut"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_info"
-        app:layout_constraintTop_toTopOf="@+id/tv_work_in_weekend" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_signOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@color/blue"
+        android:ems="16"
+        android:text="Выйти из аккаунта"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_actual_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="11"
+        android:text="Неизвестно"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_actual_location_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_actual_location_info"
+        app:layout_constraintTop_toTopOf="@+id/tv_actual_location_info" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

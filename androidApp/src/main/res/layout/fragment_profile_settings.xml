@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="16"
+        android:hint="Enter name here"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Surname"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+    <EditText
+        android:id="@+id/et_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="16"
+        android:hint="Enter surname here"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_surname" />
+
+    <TextView
+        android:id="@+id/tv_patronymic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Patronymic"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_surname" />
+
+    <EditText
+        android:id="@+id/et_patronymic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="16"
+        android:hint="Enter patronymic here"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_patronymic" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:text="date"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/tv_month"
+        app:layout_constraintTop_toTopOf="@+id/tv_month" />
+
+    <TextView
+        android:id="@+id/tv_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="3"
+        android:text="month"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/et_patronymic"
+        app:layout_constraintStart_toStartOf="@+id/et_patronymic"
+        app:layout_constraintTop_toBottomOf="@+id/et_patronymic" />
+
+    <TextView
+        android:id="@+id/tv_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:text="year"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/tv_month"
+        app:layout_constraintTop_toTopOf="@+id/tv_month" />
+
+    <EditText
+        android:id="@+id/et_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:textSize="12sp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@id/tv_date"
+        app:layout_constraintStart_toStartOf="@+id/tv_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+    <EditText
+        android:id="@+id/et_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:textSize="12sp"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@+id/tv_month"
+        app:layout_constraintStart_toStartOf="@id/tv_month"
+        app:layout_constraintEnd_toEndOf="@id/tv_month"/>
+
+    <EditText
+        android:id="@+id/et_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:textSize="12sp"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@id/tv_year"
+        app:layout_constraintEnd_toEndOf="@+id/tv_year"
+        app:layout_constraintTop_toBottomOf="@+id/tv_year" />
+
+    <EditText
+        android:id="@+id/et_birth_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter country and city"
+        android:ems="16"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_birth_city" />
+
+    <TextView
+        android:id="@+id/tv_actual_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Actual city"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_birth_city" />
+
+    <TextView
+        android:id="@+id/tv_birth_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birth city"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_month" />
+
+    <EditText
+        android:id="@+id/et_actual_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter actual country and city"
+        android:ems="16"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_actual_city" />
+
+    <TextView
+        android:id="@+id/tv_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sex:"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/et_actual_city"
+        app:layout_constraintTop_toBottomOf="@+id/et_actual_city" />
+
+    <EditText
+        android:id="@+id/et_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="sex"
+        app:layout_constraintEnd_toEndOf="@+id/et_actual_city"
+        app:layout_constraintTop_toBottomOf="@+id/et_actual_city" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:ems="10"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_save"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:ems="10"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_cancel" />
+</androidx.constraintlayout.widget.ConstraintLayout>

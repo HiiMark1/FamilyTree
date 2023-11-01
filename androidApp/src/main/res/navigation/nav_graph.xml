@@ -6,26 +6,41 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.myapplication.android.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.myapplication.android.ProfileFragment"
+        android:name="com.example.myapplication.android.profile.view.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.myapplication.android.SearchFragment"
-        android:label="SearchFragment" />
+        android:name="com.example.myapplication.android.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/treeFragment"
-        android:name="com.example.myapplication.android.TreeFragment"
-        android:label="TreeFragment" />
+        android:name="com.example.myapplication.android.tree.view.TreeFragment"
+        android:label="TreeFragment" >
+        <action
+            android:id="@+id/action_treeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.myapplication.android.LoginFragment"
+        android:name="com.example.myapplication.android.auth.view.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
@@ -36,10 +51,18 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.myapplication.android.RegistrationFragment"
+        android:name="com.example.myapplication.android.auth.view.RegistrationFragment"
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSettingsFragment"
+        android:name="com.example.myapplication.android.profile.view.ProfileSettingsFragment"
+        android:label="ProfileSettingsFragment" >
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

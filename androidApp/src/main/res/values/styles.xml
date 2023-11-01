@@ -2,5 +2,7 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar" />
 
-    <color name="black">#FFFFFF</color>
+    <color name="black">#000</color>
+    <color name="blue">#00D</color>
+
 </resources>
