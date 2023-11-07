@@ -1,37 +1,32 @@
-package com.example.myapplication.android.profile.viewmodel
+package com.example.myapplication.android.member_of_tree
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.FirebaseRealtimeDatabaseManager
+import com.example.myapplication.Tree
 import com.example.myapplication.UserInfo
 import com.example.myapplication.android.data.DIContainer
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class ProfileViewModel: ViewModel() {
-    private var firebaseRealtimeDbManager: FirebaseRealtimeDatabaseManager =
-        DIContainer.firebaseRealtimeDatabaseManagerImpl
+class MemberOfTreeViewModel: ViewModel() {
+    private var _tree: MutableLiveData<Result<Tree?>> = MutableLiveData()
+    val tree: LiveData<Result<Tree?>> = _tree
 
     private var _error: MutableLiveData<Exception> = MutableLiveData()
     val error: LiveData<Exception> = _error
 
-    private var _userInfo: MutableLiveData<Result<UserInfo?>> = MutableLiveData()
-    val userInfo: LiveData<Result<UserInfo?>> = _userInfo
-
     private var _photoUri: MutableLiveData<Result<Uri?>> = MutableLiveData()
     val photoUri: LiveData<Result<Uri?>> = _photoUri
 
-    fun getUserInfo(uid: String) {
-        firebaseRealtimeDbManager = DIContainer.firebaseRealtimeDatabaseManagerImpl
-
+    fun getTree() {
         viewModelScope.launch {
             try {
-                val userInfo = firebaseRealtimeDbManager.getUserInfo(uid)
-                _userInfo.value = Result.success(userInfo)
-            } catch (e: Exception){
+                val tree = DIContainer.firebaseTreeDatabaseManagerImpl.getTreeById(DIContainer.actualUserInfo.treeId.toString())
+                _tree.value = Result.success(tree)
+            } catch (e: Exception) {
                 _error.value = e
             }
         }

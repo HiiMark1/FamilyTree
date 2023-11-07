@@ -9,4 +9,6 @@ data class UserTreeInfo(
     var actualLocation: String? = null,
     var birthDate: String? = null,
     var sex: String? = null,
+    var photoUri: String? = null,
+    var treeId: String? = null,
 )

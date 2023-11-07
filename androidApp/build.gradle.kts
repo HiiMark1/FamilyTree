@@ -65,4 +65,10 @@ dependencies {
     implementation("com.google.firebase:firebase-common-ktx:20.3.3")
 
     implementation("com.google.firebase:firebase-database-ktx")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    // Add the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-storage")
+    implementation("com.squareup.picasso:picasso:2.8")
 }

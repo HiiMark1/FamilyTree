@@ -37,6 +37,15 @@
         <action
             android:id="@+id/action_treeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_treeFragment_to_addNewMemberFragment"
+            app:destination="@id/addNewMemberFragment" />
+        <action
+            android:id="@+id/action_treeFragment_to_infoAboutTreeFragment"
+            app:destination="@id/infoAboutTreeFragment" />
+        <action
+            android:id="@+id/action_treeFragment_to_treeInListFragment"
+            app:destination="@id/treeInListFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -65,4 +74,39 @@
             android:id="@+id/action_profileSettingsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addNewMemberFragment"
+        android:name="com.example.myapplication.android.add_new_member_in_tree.AddNewMemberFragment"
+        android:label="AddNewMemberFragment" />
+    <fragment
+        android:id="@+id/infoAboutTreeFragment"
+        android:name="com.example.myapplication.android.tree.view.InfoAboutTreeFragment"
+        android:label="InfoAboutTreeFragment" />
+    <fragment
+        android:id="@+id/treeInListFragment"
+        android:name="com.example.myapplication.android.tree_in_list.TreeInListFragment"
+        android:label="TreeInListFragment" >
+        <action
+            android:id="@+id/action_treeInListFragment_to_userInfoTreeFragment"
+            app:destination="@id/userInfoTreeFragment" />
+        <action
+            android:id="@+id/action_treeInListFragment_to_memberOfTreeFragment"
+            app:destination="@id/memberOfTreeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoTreeFragment"
+        android:name="com.example.myapplication.android.user_info.UserInfoTreeFragment"
+        android:label="UserInfoTreeFragment" />
+    <fragment
+        android:id="@+id/memberOfTreeFragment"
+        android:name="com.example.myapplication.android.member_of_tree.MemberOfTreeFragment"
+        android:label="MemberOfTreeFragment" >
+        <action
+            android:id="@+id/action_memberOfTreeFragment_to_editMemberOfTreeFragment"
+            app:destination="@id/editMemberOfTreeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editMemberOfTreeFragment"
+        android:name="com.example.myapplication.android.member_of_tree.EditMemberOfTreeFragment"
+        android:label="EditMemberOfTreeFragment" />
 </navigation>

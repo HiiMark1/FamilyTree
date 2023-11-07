@@ -1,5 +1,7 @@
 package com.example.myapplication.android.profile.view
 
+import android.content.ContentValues.TAG
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,8 +16,10 @@ import com.example.myapplication.android.profile.viewmodel.ProfileViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserInfo
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var binding: FragmentProfileBinding
@@ -40,6 +44,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         with(binding) {
+
             btnSignOut.setOnClickListener {
                 GlobalScope.launch {
                     try {
@@ -58,10 +63,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
-    private fun showMessage(msgId: String) {
+    private fun showMessage(msg: String) {
         Snackbar.make(
             requireView(),
-            msgId,
+            msg,
             Snackbar.LENGTH_LONG
         ).show()
     }
@@ -107,6 +112,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 if (userInfo != null) {
                     DIContainer.actualUserInfo = userInfo
                     setInfoAboutUser(DIContainer.actualUserInfo)
+                    if(userInfo.photoUri!=null){
+                        viewModel.getAvatarUri(DIContainer.actualUserInfo.photoUri.toString())
+                    }
+                }
+            }, onFailure = {
+                Log.e("e", it.message.toString())
+            })
+        }
+
+        viewModel.photoUri.observe(viewLifecycleOwner) {it ->
+            it.fold(onSuccess = {uri ->
+                if(uri!=null) {
+                    Picasso.get().load(uri).into(binding.ivAvatar)
                 }
             }, onFailure = {
                 Log.e("e", it.message.toString())

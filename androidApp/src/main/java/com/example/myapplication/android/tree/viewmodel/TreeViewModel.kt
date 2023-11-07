@@ -1,36 +1,86 @@
 package com.example.myapplication.android.tree.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.UserInfo
-import com.example.myapplication.UserTreeInfo
+import com.example.myapplication.Tree
 import com.example.myapplication.android.data.DIContainer
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
-class TreeViewModel {
-    private var _userMainTreeInfo: MutableLiveData<Result<UserTreeInfo?>> = MutableLiveData()
-    val userMainTreeInfo: LiveData<Result<UserTreeInfo?>> = _userMainTreeInfo
+class TreeViewModel: ViewModel() {
+    private var _tree: MutableLiveData<Result<Tree?>> = MutableLiveData()
+    val tree: LiveData<Result<Tree?>> = _tree
 
-    private var _userMotherTreeInfo: MutableLiveData<Result<UserTreeInfo?>> = MutableLiveData()
-    val userMotherTreeInfo: LiveData<Result<UserTreeInfo?>> = _userMotherTreeInfo
+    private var _mainUri: MutableLiveData<Result<Uri?>> = MutableLiveData()
+    val mainUri: LiveData<Result<Uri?>> = _mainUri
 
-    private var _userFatherTreeInfo: MutableLiveData<Result<UserTreeInfo?>> = MutableLiveData()
-    val userFatherTreeInfo: LiveData<Result<UserTreeInfo?>> = _userFatherTreeInfo
+    private var _motherUri: MutableLiveData<Result<Uri?>> = MutableLiveData()
+    val motherUri: LiveData<Result<Uri?>> = _motherUri
 
-    private var _userChildTreeInfo: MutableLiveData<Result<UserTreeInfo?>> = MutableLiveData()
-    val userChildTreeInfo: LiveData<Result<UserTreeInfo?>> = _userChildTreeInfo
+    private var _fatherUri: MutableLiveData<Result<Uri?>> = MutableLiveData()
+    val fatherUri: LiveData<Result<Uri?>> = _fatherUri
 
-    fun getMainUserInfo(uid: String) {
-//        firebaseRealtimeDbManager = DIContainer.firebaseRealtimeDatabaseManagerImpl
-//
-//        viewModelScope.launch {
-//            try {
-//                val userInfo = firebaseRealtimeDbManager.getUserInfo(uid)
-//                _userInfo.value = Result.success(userInfo)
-//            } catch (e: Exception){
-//                _error.value = e
-//            }
-//        }
+    private var _childUri: MutableLiveData<Result<Uri?>> = MutableLiveData()
+    val childUri: LiveData<Result<Uri?>> = _childUri
+
+    private var _error: MutableLiveData<Exception> = MutableLiveData()
+    val error: LiveData<Exception> = _error
+
+    fun getTree() {
+        viewModelScope.launch {
+            try {
+                val tree = DIContainer.firebaseTreeDatabaseManagerImpl.getTreeById(DIContainer.actualUserInfo.treeId.toString())
+                _tree.value = Result.success(tree)
+            } catch (e: Exception) {
+                _error.value = e
+            }
+        }
+    }
+
+    fun getMotherUri(url: String){
+        viewModelScope.launch {
+            try {
+                val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()
+                _motherUri.value = Result.success(downloadedUri)
+            } catch (e: Exception) {
+                _error.value = e
+            }
+        }
+    }
+
+    fun getFatherUri(url: String){
+        viewModelScope.launch {
+            try {
+                val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()
+                _fatherUri.value = Result.success(downloadedUri)
+            } catch (e: Exception) {
+                _error.value = e
+            }
+        }
+    }
+
+    fun getMainUri(url: String){
+        viewModelScope.launch {
+            try {
+                val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()
+                _mainUri.value = Result.success(downloadedUri)
+            } catch (e: Exception) {
+                _error.value = e
+            }
+        }
+    }
+
+    fun getChildUri(url: String){
+        viewModelScope.launch {
+            try {
+                val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()
+                _childUri.value = Result.success(downloadedUri)
+            } catch (e: Exception) {
+                _error.value = e
+            }
+        }
     }
 }
