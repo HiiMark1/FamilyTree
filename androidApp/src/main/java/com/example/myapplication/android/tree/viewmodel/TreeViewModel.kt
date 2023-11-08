@@ -10,7 +10,7 @@ import com.example.myapplication.android.data.DIContainer
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class TreeViewModel: ViewModel() {
+class TreeViewModel : ViewModel() {
     private var _tree: MutableLiveData<Result<Tree?>> = MutableLiveData()
     val tree: LiveData<Result<Tree?>> = _tree
 
@@ -29,10 +29,26 @@ class TreeViewModel: ViewModel() {
     private var _error: MutableLiveData<Exception> = MutableLiveData()
     val error: LiveData<Exception> = _error
 
+    private var _isCompleted: MutableLiveData<Result<Boolean>> = MutableLiveData()
+    val isCompleted: LiveData<Result<Boolean>> = _isCompleted
+
+    fun createOwnTree(tree: Tree) {
+        viewModelScope.launch {
+            try {
+                var isCompleted = DIContainer.firebaseTreeDatabaseManagerImpl.createNewTree(tree)
+                _isCompleted.value = Result.success(isCompleted)
+            } catch (ex: Exception) {
+                _isCompleted.value = Result.failure(ex)
+                _error.value = ex
+            }
+        }
+    }
+
     fun getTree() {
         viewModelScope.launch {
             try {
-                val tree = DIContainer.firebaseTreeDatabaseManagerImpl.getTreeById(DIContainer.actualUserInfo.treeId.toString())
+                val tree =
+                    DIContainer.firebaseTreeDatabaseManagerImpl.getTreeById(DIContainer.actualUserInfo.treeId.toString())
                 _tree.value = Result.success(tree)
             } catch (e: Exception) {
                 _error.value = e
@@ -40,7 +56,7 @@ class TreeViewModel: ViewModel() {
         }
     }
 
-    fun getMotherUri(url: String){
+    fun getMotherUri(url: String) {
         viewModelScope.launch {
             try {
                 val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()
@@ -51,7 +67,7 @@ class TreeViewModel: ViewModel() {
         }
     }
 
-    fun getFatherUri(url: String){
+    fun getFatherUri(url: String) {
         viewModelScope.launch {
             try {
                 val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()
@@ -62,7 +78,7 @@ class TreeViewModel: ViewModel() {
         }
     }
 
-    fun getMainUri(url: String){
+    fun getMainUri(url: String) {
         viewModelScope.launch {
             try {
                 val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()
@@ -73,7 +89,7 @@ class TreeViewModel: ViewModel() {
         }
     }
 
-    fun getChildUri(url: String){
+    fun getChildUri(url: String) {
         viewModelScope.launch {
             try {
                 val downloadedUri = DIContainer.avatarsStorageRef.child(url).downloadUrl.await()

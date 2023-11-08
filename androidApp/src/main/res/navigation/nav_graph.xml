@@ -108,9 +108,16 @@
             android:id="@+id/action_memberOfTreeFragment_to_treeFragment"
             app:destination="@id/treeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_memberOfTreeFragment_to_mediaPhotoFragment"
+            app:destination="@id/mediaPhotoFragment" />
     </fragment>
     <fragment
         android:id="@+id/editMemberOfTreeFragment"
         android:name="com.example.myapplication.android.member_of_tree.EditMemberOfTreeFragment"
         android:label="EditMemberOfTreeFragment" />
+    <fragment
+        android:id="@+id/mediaPhotoFragment"
+        android:name="com.example.myapplication.android.member_of_tree.MediaPhotoFragment"
+        android:label="MediaPhotoFragment" />
 </navigation>

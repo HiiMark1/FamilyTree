@@ -11,4 +11,5 @@ data class UserTreeInfo(
     var sex: String? = null,
     var photoUri: String? = null,
     var treeId: String? = null,
+    var numOfPhoto: Int = 0,
 )

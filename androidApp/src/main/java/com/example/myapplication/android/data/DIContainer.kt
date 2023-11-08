@@ -19,6 +19,9 @@ object DIContainer {
     val userInfoDbRef: DatabaseReference = Firebase.database.getReference("user_info")
     val treeDbRef: DatabaseReference = Firebase.database.getReference("tree")
     val avatarsStorageRef = FirebaseStorage.getInstance().getReference("avatars/")
+    val photosStorageRef = FirebaseStorage.getInstance().getReference("photos/")
+    val videosStorageRef = FirebaseStorage.getInstance().getReference("videos/")
+
     var actualUserInfo = UserInfo()
     var tree = Tree()
 
@@ -30,4 +33,7 @@ object DIContainer {
 
     val firebaseTreeDatabaseManagerImpl: FirebaseTreeDatabaseManager =
         FirebaseTreeDatabaseManagerImpl(auth, treeDbRef, userInfoDbRef)
+
+    val firebaseStorageServiceImpl =
+        FirebaseStorageServiceImpl(photosStorageRef, videosStorageRef)
 }

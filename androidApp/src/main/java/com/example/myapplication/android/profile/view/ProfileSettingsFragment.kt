@@ -84,6 +84,10 @@ class ProfileSettingsFragment : Fragment(R.layout.fragment_profile_settings) {
             etDate.setText(list?.get(0) ?: "xx")
             etMonth.setText(list?.get(1) ?: "xx")
             etYear.setText(list?.get(2) ?: "xxxx")
+            etEmail.setText(userInfo.email)
+            if(userInfo.isPrivacy){
+                switchPrivacy.isChecked = true
+            }
         }
     }
 
@@ -98,6 +102,8 @@ class ProfileSettingsFragment : Fragment(R.layout.fragment_profile_settings) {
             DIContainer.actualUserInfo.sex = etSex.text.toString()
             DIContainer.actualUserInfo.birthDate = etDate.text.toString() + "/" + etMonth.text.toString() +
                     "/" + etYear.text.toString()
+            DIContainer.actualUserInfo.email = etEmail.text.toString()
+            DIContainer.actualUserInfo.isPrivacy = switchPrivacy.isChecked
         }
     }
 

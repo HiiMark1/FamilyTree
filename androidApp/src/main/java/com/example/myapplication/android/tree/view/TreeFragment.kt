@@ -53,6 +53,9 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
         if (Firebase.auth.currentUser?.uid == null) {
             view.findNavController().navigate(R.id.treeFragment)
         } else {
+            if (uid == "null") {
+                uid = DIContainer.actualUserInfo.uid.toString()
+            }
             if (DIContainer.actualUserInfo.treeId == null) {
                 setNoViewTree()
                 with(binding) {
@@ -97,11 +100,6 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
                         view.findNavController()
                             .navigate(R.id.action_treeFragment_to_addNewMemberFragment)
                     }
-
-//                    var userIdInArray = 0
-//                    for (i in 0..DIContainer.tree.relationshipArray.size - 1) {
-//                        if (DIContainer.tree.relationshipArray[i].userid ==)
-//                    }
                 }
             }
         }
@@ -117,7 +115,7 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
             var relationship = Relationship(auth.currentUser?.uid.toString())
             tree.relationshipArray = listOf(relationship)
 
-            firebaseTreeDatabaseManagerImpl.createNewTree(tree)
+            viewModel.createOwnTree(tree)
         }
     }
 
@@ -210,9 +208,7 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
     }
 
     private fun setViews() {
-        if (uid == "null") {
-            uid = DIContainer.actualUserInfo.uid.toString()
-        }
+
         var user: UserTreeInfo
         for (i in 0..DIContainer.tree.relationshipArray.size - 1) {
             if (DIContainer.tree.relationshipArray[i].userid == uid) {
@@ -327,6 +323,14 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
                 if (uri != null) {
                     Picasso.get().load(uri).into(binding.iv1child1)
                 }
+            }, onFailure = {
+                Log.e("e", it.message.toString())
+            })
+        }
+
+        viewModel.isCompleted.observe(viewLifecycleOwner) { it ->
+            it.fold(onSuccess = {
+                view?.findNavController()?.navigate(R.id.treeFragment)
             }, onFailure = {
                 Log.e("e", it.message.toString())
             })

@@ -1,7 +1,7 @@
 package com.example.myapplication
 
 interface FirebaseTreeDatabaseManager {
-    suspend fun createNewTree(tree: Tree)
+    suspend fun createNewTree(tree: Tree): Boolean
 
     suspend fun getTreeById(id: String): Tree?
 

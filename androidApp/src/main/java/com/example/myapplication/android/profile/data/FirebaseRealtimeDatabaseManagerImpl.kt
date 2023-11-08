@@ -18,7 +18,6 @@ class FirebaseRealtimeDatabaseManagerImpl(
     override suspend fun saveUserInfoData(userInfo: UserInfo) {
         withContext(Dispatchers.IO) {
             userInfoDbRef.child(auth.currentUser?.uid.toString()).setValue(userInfo)
-
         }
     }
 

@@ -73,7 +73,7 @@
         android:id="@+id/tv_birthday_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="Дата рождения: "
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -84,7 +84,7 @@
         android:id="@+id/tv_location_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="Город: "
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -122,7 +122,7 @@
         android:id="@+id/tv_actual_location_info"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:ems="11"
         android:text="Нынешнее место проживания:"
         android:textAlignment="center"
@@ -137,7 +137,7 @@
         android:id="@+id/btn_edit_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:ems="16"
         android:text="Редактировать информацию"
         app:layout_constraintBottom_toTopOf="@+id/btn_tree"
@@ -148,7 +148,7 @@
         android:id="@+id/btn_tree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="24dp"
         android:background="@color/blue"
         android:ems="16"
         android:text="Древо"
@@ -169,6 +169,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_actual_location_info"
         app:layout_constraintTop_toTopOf="@+id/tv_actual_location_info" />
+
+    <Button
+        android:id="@+id/btn_media_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Фотографии"
+        android:ems="16"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_edit_info"
+        app:layout_constraintEnd_toEndOf="@+id/btn_edit_info"
+        app:layout_constraintStart_toStartOf="@+id/btn_edit_info" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

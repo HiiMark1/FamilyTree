@@ -10,6 +10,7 @@ data class UserInfo(
     var birthDate: String? = null,
     var sex: String? = null,
     var treeId: String? = null,
-    var privacy: Boolean = false,
+    var isPrivacy: Boolean = false,
     var photoUri: String? = null,
+    var email: String? = null,
 )

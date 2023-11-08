@@ -15,14 +15,21 @@ class FirebaseTreeDatabaseManagerImpl(
     private val treeDbRef: DatabaseReference,
     private val userInfoDbRef: DatabaseReference,
 ) : FirebaseTreeDatabaseManager {
-    override suspend fun createNewTree(tree: Tree) {
+    override suspend fun createNewTree(tree: Tree): Boolean {
+        var isCompleted = false
         var key = treeDbRef.push().key
         if (key != null) {
             treeDbRef.child(key).setValue(tree)
-            userInfoDbRef.child(auth.currentUser?.uid.toString()).child("treeId")
-                .setValue(key).await()
             DIContainer.actualUserInfo.treeId = key
+            userInfoDbRef.child(auth.currentUser?.uid.toString()).child("treeId")
+                .setValue(key).addOnSuccessListener {
+                    isCompleted = true
+                }
+                .addOnFailureListener{
+                    isCompleted = false
+                }
         }
+        return isCompleted
     }
 
     override suspend fun getTreeById(id: String): Tree? {

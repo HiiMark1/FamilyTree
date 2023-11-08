@@ -27,11 +27,6 @@ class UserHolder(
     fun bind(user: UserTreeInfo) {
         this.userTreeInfo = user
         with(binding) {
-//            GlobalScope.launch {
-//                Picasso.get()
-//                    .load(DIContainer.avatarsStorageRef.child(user.photoUri.toString()).downloadUrl.await())
-//                    .into(ivUserPhoto)
-//            }
             tvName.text = user.name.toString()
             tvSurname.text = user.surname.toString()
         }

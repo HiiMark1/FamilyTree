@@ -49,6 +49,14 @@ class MemberOfTreeFragment : Fragment(R.layout.fragment_member_of_tree) {
                         bundleOf(ARG_NAME to userId)
                     )
             }
+
+            btnMediaPhoto.setOnClickListener {
+                view?.findNavController()
+                    ?.navigate(
+                        R.id.action_memberOfTreeFragment_to_mediaPhotoFragment,
+                        bundleOf(ARG_NAME to userId)
+                    )
+            }
         }
     }
 
