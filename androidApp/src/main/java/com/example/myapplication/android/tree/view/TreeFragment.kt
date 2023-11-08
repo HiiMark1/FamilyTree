@@ -16,12 +16,15 @@ import com.example.myapplication.android.R
 import com.example.myapplication.android.data.DIContainer
 import com.example.myapplication.android.databinding.FragmentTreeBinding
 import com.example.myapplication.android.tree.viewmodel.TreeViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
+private const val ARG_NAME = "user_id"
 
 class TreeFragment : Fragment(R.layout.fragment_tree) {
     private lateinit var binding: FragmentTreeBinding
@@ -31,11 +34,12 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
         DIContainer.firebaseTreeDatabaseManagerImpl
     private var firebaseRealtimeDatabaseManagerImpl: FirebaseRealtimeDatabaseManager =
         DIContainer.firebaseRealtimeDatabaseManagerImpl
-    private var uid: String = ""
+    private var uid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[TreeViewModel::class.java]
+        uid = arguments?.getString(ARG_NAME).toString()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,6 +84,11 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
                         view.findNavController()
                             .navigate(R.id.action_treeFragment_to_addNewMemberFragment)
                     }
+
+//                    var userIdInArray = 0
+//                    for (i in 0..DIContainer.tree.relationshipArray.size - 1) {
+//                        if (DIContainer.tree.relationshipArray[i].userid ==)
+//                    }
                 }
             }
         }
@@ -183,25 +192,47 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
     }
 
     private fun setViews() {
-        if (uid == "") {
+        if (uid == "null") {
             uid = DIContainer.actualUserInfo.uid.toString()
         }
         var user: UserTreeInfo
         for (i in 0..DIContainer.tree.relationshipArray.size - 1) {
             if (DIContainer.tree.relationshipArray[i].userid == uid) {
+                var isHaveChild = false
+                var isHaveMother = false
+                var isHaveFather = false
                 var relation = DIContainer.tree.relationshipArray[i]
                 for (i in 0..DIContainer.tree.userInfoArray.size - 1) {
                     if (relation.motherUid != null && DIContainer.tree.userInfoArray[i].uid == relation.motherUid) {
                         setMotherView(DIContainer.tree.userInfoArray[i])
+                        isHaveMother = true
                     }
                     if (relation.fatherUid != null && DIContainer.tree.userInfoArray[i].uid == relation.fatherUid) {
                         setFatherView(DIContainer.tree.userInfoArray[i])
+                        isHaveFather = true
                     }
                     if (relation.userid != null && DIContainer.tree.userInfoArray[i].uid == relation.userid) {
                         setMainUserView(DIContainer.tree.userInfoArray[i])
                     }
                     if (relation.childId != null && DIContainer.tree.userInfoArray[i].uid == relation.childId) {
                         setChildView(DIContainer.tree.userInfoArray[i])
+                        isHaveChild = true
+                    }
+                }
+                if (!isHaveChild){
+                    setNoChildView()
+                    binding.iv0child.setOnClickListener {
+                        //TODO
+                    }
+                }
+                if(!isHaveMother){
+                    binding.ivMother.setOnClickListener {
+                        //TODO
+                    }
+                }
+                if(!isHaveFather){
+                    binding.ivFather.setOnClickListener {
+                        //todo
                     }
                 }
                 break
@@ -264,5 +295,13 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
                 Log.e("e", it.message.toString())
             })
         }
+    }
+
+    private fun showMessage(msg: String) {
+        Snackbar.make(
+            requireView(),
+            msg,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 }
