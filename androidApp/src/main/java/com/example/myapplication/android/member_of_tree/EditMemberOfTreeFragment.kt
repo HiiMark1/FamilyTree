@@ -12,6 +12,7 @@ import com.example.myapplication.UserTreeInfo
 import com.example.myapplication.android.R
 import com.example.myapplication.android.data.DIContainer
 import com.example.myapplication.android.databinding.FragmentEditMemberOfTreeBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -146,7 +147,16 @@ class EditMemberOfTreeFragment : Fragment(R.layout.fragment_edit_member_of_tree)
         GlobalScope.launch {
             DIContainer.avatarsStorageRef.child(userId).putFile(uri)
                 .addOnSuccessListener {
+                    showMessage("Изображение успешно загружено")
                 }.await()
         }
+    }
+
+    private fun showMessage(msg: String) {
+        Snackbar.make(
+            requireView(),
+            msg,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 }

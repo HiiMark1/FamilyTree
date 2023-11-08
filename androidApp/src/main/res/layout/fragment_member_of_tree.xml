@@ -140,18 +140,18 @@
         android:layout_marginBottom="16dp"
         android:ems="16"
         android:text="Редактировать информацию"
-        app:layout_constraintBottom_toTopOf="@+id/btn_back"
+        app:layout_constraintBottom_toTopOf="@+id/btn_tree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_tree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:background="@color/blue"
         android:ems="16"
-        android:text="Назад"
+        android:text="Древо"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

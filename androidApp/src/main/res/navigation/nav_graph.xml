@@ -104,6 +104,10 @@
         <action
             android:id="@+id/action_memberOfTreeFragment_to_editMemberOfTreeFragment"
             app:destination="@id/editMemberOfTreeFragment" />
+        <action
+            android:id="@+id/action_memberOfTreeFragment_to_treeFragment"
+            app:destination="@id/treeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/editMemberOfTreeFragment"

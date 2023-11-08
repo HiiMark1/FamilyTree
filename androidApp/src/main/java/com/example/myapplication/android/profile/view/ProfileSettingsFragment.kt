@@ -80,6 +80,10 @@ class ProfileSettingsFragment : Fragment(R.layout.fragment_profile_settings) {
             etActualCity.setText(userInfo.actualLocation)
             etBirthCity.setText(userInfo.birthLocation)
             etSex.setText(userInfo.sex)
+            var list = userInfo.birthDate?.split("/")
+            etDate.setText(list?.get(0) ?: "xx")
+            etMonth.setText(list?.get(1) ?: "xx")
+            etYear.setText(list?.get(2) ?: "xxxx")
         }
     }
 
@@ -125,11 +129,11 @@ class ProfileSettingsFragment : Fragment(R.layout.fragment_profile_settings) {
     private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
 
     private fun uploadFile(uri: Uri) {
-        DIContainer.actualUserInfo.photoUri = uri.lastPathSegment
+        DIContainer.actualUserInfo.photoUri = DIContainer.actualUserInfo.uid
         GlobalScope.launch {
             firebaseStorageRef.child(DIContainer.actualUserInfo.uid.toString()).putFile(uri)
                 .addOnSuccessListener {
-
+                    showMessage("Изображение успешно загружено")
                 }.await()
         }
     }

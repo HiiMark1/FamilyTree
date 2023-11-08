@@ -14,8 +14,10 @@ import com.example.myapplication.android.R
 import com.example.myapplication.android.data.DIContainer
 import com.example.myapplication.android.databinding.FragmentTreeInListBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.tasks.await
 
 private const val ARG_NAME = "user_id"
+private const val ARG_CHOOSE = "is_choose"
 
 class TreeInListFragment : Fragment(R.layout.fragment_tree_in_list) {
     private lateinit var binding: FragmentTreeInListBinding
@@ -24,6 +26,8 @@ class TreeInListFragment : Fragment(R.layout.fragment_tree_in_list) {
     private lateinit var viewModel: TreeListViewModel
     private lateinit var users: List<UserTreeInfo?>
     private var userListAdapter: UserListAdapter? = null
+    private var chooseList = "null"
+    private var uid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +38,12 @@ class TreeInListFragment : Fragment(R.layout.fragment_tree_in_list) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentTreeInListBinding.bind(view)
+        chooseList = arguments?.getString(ARG_CHOOSE).toString()
+        uid = arguments?.getString(ARG_NAME).toString()
         initObservers()
         viewModel.getTree()
 
-        if (DIContainer.actualUserInfo.uid!=null && DIContainer.actualUserInfo.treeId!=null){
+        if (DIContainer.actualUserInfo.uid != null && DIContainer.actualUserInfo.treeId != null) {
 
             with(binding) {
                 swipeContainer.setOnRefreshListener {
@@ -61,9 +67,16 @@ class TreeInListFragment : Fragment(R.layout.fragment_tree_in_list) {
     }
 
     private fun updateUsers(users: List<UserTreeInfo?>) {
-        userListAdapter = UserListAdapter {
-            infoAboutItem(it)
-            userListAdapter?.submitList(users.toMutableList())
+        if (chooseList != "null") {
+            userListAdapter = UserListAdapter {
+                chooseMember(it)
+                userListAdapter?.submitList(users.toMutableList())
+            }
+        } else {
+            userListAdapter = UserListAdapter {
+                infoAboutItem(it)
+                userListAdapter?.submitList(users.toMutableList())
+            }
         }
 
         val decorator = DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
@@ -74,6 +87,41 @@ class TreeInListFragment : Fragment(R.layout.fragment_tree_in_list) {
         }
 
         userListAdapter?.submitList(users.toMutableList())
+    }
+
+    private fun chooseMember(it: String) {
+        var idInArray = 0
+        for (i in 0..DIContainer.tree.relationshipArray.size - 1) {
+            if (DIContainer.tree.relationshipArray[i].userid == uid){
+                idInArray = i
+                break
+            }
+        }
+        when(chooseList){
+            "mother" -> {
+                var list = DIContainer.tree.relationshipArray.toMutableList()
+                list[idInArray].motherUid = it
+                DIContainer.tree.relationshipArray = list.toList()
+                DIContainer.treeDbRef.child(DIContainer.actualUserInfo.treeId.toString())
+                    .setValue(DIContainer.tree)
+                showMessage(it)
+            }
+            "father" -> {
+                var list = DIContainer.tree.relationshipArray.toMutableList()
+                list[idInArray].fatherUid = it
+                DIContainer.tree.relationshipArray = list.toList()
+                DIContainer.treeDbRef.child(DIContainer.actualUserInfo.treeId.toString())
+                    .setValue(DIContainer.tree)
+            }
+            "child" -> {
+                var list = DIContainer.tree.relationshipArray.toMutableList()
+                list[idInArray].childId = it
+                DIContainer.tree.relationshipArray = list.toList()
+                DIContainer.treeDbRef.child(DIContainer.actualUserInfo.treeId.toString())
+                    .setValue(DIContainer.tree)
+            }
+        }
+        view?.findNavController()?.navigate(R.id.treeFragment)
     }
 
     private fun infoAboutItem(it: String) {

@@ -3,6 +3,7 @@ package com.example.myapplication.android.tree.view
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -16,15 +17,16 @@ import com.example.myapplication.android.R
 import com.example.myapplication.android.data.DIContainer
 import com.example.myapplication.android.databinding.FragmentTreeBinding
 import com.example.myapplication.android.tree.viewmodel.TreeViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 private const val ARG_NAME = "user_id"
+private const val ARG_CHOOSE = "is_choose"
 
 class TreeFragment : Fragment(R.layout.fragment_tree) {
     private lateinit var binding: FragmentTreeBinding
@@ -45,7 +47,6 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTreeBinding.bind(view)
-
         initObservers()
         viewModel.getTree()
 
@@ -59,6 +60,18 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
                         DIContainer.actualUserInfo.treeId = etEnterCode.text.toString()
                         GlobalScope.launch {
                             firebaseRealtimeDatabaseManagerImpl.saveUserInfoData(DIContainer.actualUserInfo)
+                            var tree =
+                                DIContainer.treeDbRef.child(DIContainer.actualUserInfo.treeId.toString())
+                                    .get().await().getValue(Tree::class.java)
+                            if (tree != null) {
+                                var list = tree?.userInfoArray?.toMutableList()
+                                list?.add(convertUserInfoInUserTreeInfo(DIContainer.actualUserInfo))
+                                tree.userInfoArray = list!!.toList()
+                                var list1 = tree.relationshipArray.toMutableList()
+                                list1?.add(Relationship(DIContainer.actualUserInfo.uid))
+                                tree.relationshipArray = list1.toList()
+                            }
+
                         }
                         view?.findNavController()?.navigate(R.id.treeFragment)
                     }
@@ -96,16 +109,7 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
 
     private fun createOwnTree() {
         GlobalScope.launch {
-            var userInfo2 = UserTreeInfo()
-            userInfo2.uid = DIContainer.actualUserInfo.uid
-            userInfo2.name = DIContainer.actualUserInfo.name
-            userInfo2.surname = DIContainer.actualUserInfo.surname
-            userInfo2.patronymic = DIContainer.actualUserInfo.patronymic
-            userInfo2.birthLocation = DIContainer.actualUserInfo.birthLocation
-            userInfo2.actualLocation = DIContainer.actualUserInfo.actualLocation
-            userInfo2.birthDate = DIContainer.actualUserInfo.birthDate
-            userInfo2.sex = DIContainer.actualUserInfo.sex
-            userInfo2.photoUri = DIContainer.actualUserInfo.photoUri
+            var userInfo2 = convertUserInfoInUserTreeInfo(DIContainer.actualUserInfo)
             var tree = Tree()
             var userInfoList: List<UserTreeInfo> = listOf(userInfo2)
             tree.userInfoArray = userInfoList
@@ -115,6 +119,20 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
 
             firebaseTreeDatabaseManagerImpl.createNewTree(tree)
         }
+    }
+
+    private fun convertUserInfoInUserTreeInfo(userInfo: UserInfo): UserTreeInfo {
+        var user = UserTreeInfo()
+        user.uid = userInfo.uid
+        user.name = userInfo.name
+        user.surname = userInfo.surname
+        user.patronymic = userInfo.patronymic
+        user.birthLocation = userInfo.birthLocation
+        user.actualLocation = userInfo.actualLocation
+        user.birthDate = userInfo.birthDate
+        user.sex = userInfo.sex
+        user.photoUri = userInfo.photoUri
+        return user
     }
 
     private suspend fun getUserInfo(uid: String): UserInfo? {
@@ -186,7 +204,7 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
 
     private fun setChildView(user: UserTreeInfo) {
         with(binding) {
-            tv0child.setText(user.name + "\n" + user.surname)
+            tv1child1.setText(user.name + "\n" + user.surname)
             viewModel.getChildUri(user.photoUri.toString())
         }
     }
@@ -219,20 +237,38 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
                         isHaveChild = true
                     }
                 }
-                if (!isHaveChild){
+                if (!isHaveChild) {
                     setNoChildView()
                     binding.iv0child.setOnClickListener {
-                        //TODO
+                        view?.findNavController()?.navigate(
+                            R.id.action_treeFragment_to_treeInListFragment,
+                            bundleOf(
+                                ARG_NAME to uid,
+                                ARG_CHOOSE to "child"
+                            )
+                        )
                     }
                 }
-                if(!isHaveMother){
+                if (!isHaveMother) {
                     binding.ivMother.setOnClickListener {
-                        //TODO
+                        view?.findNavController()?.navigate(
+                            R.id.action_treeFragment_to_treeInListFragment,
+                            bundleOf(
+                                ARG_NAME to uid,
+                                ARG_CHOOSE to "mother"
+                            )
+                        )
                     }
                 }
-                if(!isHaveFather){
+                if (!isHaveFather) {
                     binding.ivFather.setOnClickListener {
-                        //todo
+                        view?.findNavController()?.navigate(
+                            R.id.action_treeFragment_to_treeInListFragment,
+                            bundleOf(
+                                ARG_NAME to uid,
+                                ARG_CHOOSE to "father"
+                            )
+                        )
                     }
                 }
                 break
@@ -289,19 +325,11 @@ class TreeFragment : Fragment(R.layout.fragment_tree) {
         viewModel.childUri.observe(viewLifecycleOwner) { it ->
             it.fold(onSuccess = { uri ->
                 if (uri != null) {
-                    Picasso.get().load(uri).into(binding.iv0child)
+                    Picasso.get().load(uri).into(binding.iv1child1)
                 }
             }, onFailure = {
                 Log.e("e", it.message.toString())
             })
         }
-    }
-
-    private fun showMessage(msg: String) {
-        Snackbar.make(
-            requireView(),
-            msg,
-            Snackbar.LENGTH_LONG
-        ).show()
     }
 }

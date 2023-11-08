@@ -37,28 +37,29 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileBinding.bind(view)
         initObservers()
-        viewModel.getUserInfo(auth.currentUser!!.uid)
 
         if (auth.currentUser == null) {
             view?.findNavController()?.navigate(R.id.action_profileFragment_to_loginFragment)
-        }
+        } else {
+            viewModel.getUserInfo(auth.currentUser!!.uid)
 
-        with(binding) {
+            with(binding) {
 
-            btnSignOut.setOnClickListener {
-                GlobalScope.launch {
-                    try {
-                        authManager.signOut()
-                        view?.findNavController()
-                            ?.navigate(R.id.action_profileFragment_to_loginFragment)
-                    } catch (e: Exception) {
-                        showMessage(e.toString())
+                btnSignOut.setOnClickListener {
+                    GlobalScope.launch {
+                        try {
+                            authManager.signOut()
+                            view?.findNavController()
+                                ?.navigate(R.id.action_profileFragment_to_loginFragment)
+                        } catch (e: Exception) {
+                            showMessage(e.toString())
+                        }
                     }
                 }
-            }
-            btnEditInfo.setOnClickListener {
-                view.findNavController()
-                    .navigate(R.id.action_profileFragment_to_profileSettingsFragment)
+                btnEditInfo.setOnClickListener {
+                    view.findNavController()
+                        .navigate(R.id.action_profileFragment_to_profileSettingsFragment)
+                }
             }
         }
     }

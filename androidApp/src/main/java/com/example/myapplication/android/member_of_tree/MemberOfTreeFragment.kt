@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import com.example.myapplication.Tree
 import com.example.myapplication.UserTreeInfo
 import com.example.myapplication.android.R
-import com.example.myapplication.android.data.DIContainer
 import com.example.myapplication.android.databinding.FragmentMemberOfTreeBinding
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -37,12 +36,18 @@ class MemberOfTreeFragment : Fragment(R.layout.fragment_member_of_tree) {
         with(binding) {
             btnEditInfo.setOnClickListener {
                 view?.findNavController()
-                    ?.navigate(R.id.action_memberOfTreeFragment_to_editMemberOfTreeFragment,
-                        bundleOf(ARG_NAME to userId))
+                    ?.navigate(
+                        R.id.action_memberOfTreeFragment_to_editMemberOfTreeFragment,
+                        bundleOf(ARG_NAME to userId)
+                    )
             }
 
-            btnBack.setOnClickListener {
-                activity?.onBackPressed()
+            btnTree.setOnClickListener {
+                view?.findNavController()
+                    ?.navigate(
+                        R.id.action_memberOfTreeFragment_to_treeFragment,
+                        bundleOf(ARG_NAME to userId)
+                    )
             }
         }
     }
@@ -112,13 +117,5 @@ class MemberOfTreeFragment : Fragment(R.layout.fragment_member_of_tree) {
                 Log.e("e", it.message.toString())
             })
         }
-    }
-
-    private fun showMessage(msg: String) {
-        Snackbar.make(
-            requireView(),
-            msg,
-            Snackbar.LENGTH_LONG
-        ).show()
     }
 }
