@@ -40,6 +40,11 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                     signUp(email, password)
                 }
             }
+
+            btnBackToLogin.setOnClickListener {
+                view?.findNavController()
+                    ?.navigate(R.id.action_registrationFragment_to_loginFragment)
+            }
         }
     }
 
@@ -63,7 +68,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         }
     }
 
-    private fun checkEditTexts(email:String, password: String): Boolean {
+    private fun checkEditTexts(email: String, password: String): Boolean {
         with(binding) {
             if (email == "") {
                 showMessage(R.string.empty_login)

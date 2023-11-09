@@ -52,7 +52,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             view?.findNavController()
                                 ?.navigate(R.id.action_profileFragment_to_loginFragment)
                         } catch (e: Exception) {
-                            showMessage(e.toString())
+                            Log.e("e", e.toString())
                         }
                     }
                 }
@@ -105,7 +105,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun initObservers() {
         viewModel.error.observe(viewLifecycleOwner) {
-            showMessage(it.message.toString())
+            Log.e("e", it.message.toString())
         }
 
         viewModel.userInfo.observe(viewLifecycleOwner) { it ->
