@@ -91,16 +91,20 @@ class TreeInListFragment : Fragment(R.layout.fragment_tree_in_list) {
 
     private fun chooseMember(it: String) {
         var idInArray = 0
+        var choosenUserIdInArray = 0
         for (i in 0..DIContainer.tree.relationshipArray.size - 1) {
             if (DIContainer.tree.relationshipArray[i].userid == uid){
                 idInArray = i
-                break
+            }
+            if (DIContainer.tree.relationshipArray[i].userid == it){
+                choosenUserIdInArray = i
             }
         }
         when(chooseList){
             "mother" -> {
                 var list = DIContainer.tree.relationshipArray.toMutableList()
                 list[idInArray].motherUid = it
+                list[choosenUserIdInArray].childId = uid
                 DIContainer.tree.relationshipArray = list.toList()
                 DIContainer.treeDbRef.child(DIContainer.actualUserInfo.treeId.toString())
                     .setValue(DIContainer.tree)
@@ -109,6 +113,7 @@ class TreeInListFragment : Fragment(R.layout.fragment_tree_in_list) {
             "father" -> {
                 var list = DIContainer.tree.relationshipArray.toMutableList()
                 list[idInArray].fatherUid = it
+                list[choosenUserIdInArray].childId = uid
                 DIContainer.tree.relationshipArray = list.toList()
                 DIContainer.treeDbRef.child(DIContainer.actualUserInfo.treeId.toString())
                     .setValue(DIContainer.tree)

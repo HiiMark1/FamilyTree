@@ -104,6 +104,7 @@ class ProfileSettingsFragment : Fragment(R.layout.fragment_profile_settings) {
                     "/" + etYear.text.toString()
             DIContainer.actualUserInfo.email = etEmail.text.toString()
             DIContainer.actualUserInfo.isPrivacy = switchPrivacy.isChecked
+            DIContainer.actualUserInfo.photoUri = DIContainer.actualUserInfo.uid
         }
     }
 

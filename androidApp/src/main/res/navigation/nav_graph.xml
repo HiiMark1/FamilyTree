@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_searchFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_infoAboutUserFragment"
+            app:destination="@id/infoAboutUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/treeFragment"
@@ -120,4 +123,8 @@
         android:id="@+id/mediaPhotoFragment"
         android:name="com.example.myapplication.android.member_of_tree.MediaPhotoFragment"
         android:label="MediaPhotoFragment" />
+    <fragment
+        android:id="@+id/infoAboutUserFragment"
+        android:name="com.example.myapplication.android.search.InfoAboutUserFragment"
+        android:label="InfoAboutUserFragment" />
 </navigation>
