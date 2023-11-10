@@ -5,8 +5,8 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.tasks.await
 
 class FirebaseStorageServiceImpl(
-    val firebaseStoragePhotosRef: StorageReference,
-    val firebaseStorageVideosRef: StorageReference,
+    private val firebaseStoragePhotosRef: StorageReference,
+    private val firebaseStorageAvatarRef: StorageReference
 ) {
     suspend fun uploadPhotoAndGetIsCompleted(uri: Uri, uid: String, i: Int): Boolean {
         var isCompleted = false
@@ -22,7 +22,7 @@ class FirebaseStorageServiceImpl(
         return isCompleted
     }
 
-    suspend fun getPhotoUri(uid: String, i: Int): Uri? {
+    suspend fun getPhotoUriByIdAndIdInArray(uid: String, i: Int): Uri? {
         var downloadedUri: Uri? = null
         firebaseStoragePhotosRef.child(uid).child(i.toString()).downloadUrl
             .addOnSuccessListener {
@@ -33,5 +33,9 @@ class FirebaseStorageServiceImpl(
             }.await()
 
         return downloadedUri
+    }
+
+    suspend fun  getPhotoByUrl(url: String): Uri? {
+        return firebaseStorageAvatarRef.child(url).downloadUrl.await()
     }
 }

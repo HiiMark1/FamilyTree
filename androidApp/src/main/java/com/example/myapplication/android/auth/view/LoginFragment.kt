@@ -19,10 +19,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private var auth: FirebaseAuth = DIContainer.auth
     private var authManager: FirebaseAuthManager = DIContainer.firebaseAuthManagerImpl
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -30,15 +26,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         with(binding) {
             btnSignUp.setOnClickListener {
-                view?.findNavController()?.navigate(R.id.action_loginFragment_to_registrationFragment)
+                view.findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
 
             btnSignIn.setOnClickListener {
-                var email: String = etMail.text.toString()
-                var password: String = etPassword.text.toString()
+                val email: String = etMail.text.toString()
+                val password: String = etPassword.text.toString()
                 signIn(email, password)
                 if (auth.currentUser!=null) {
-                    view?.findNavController()?.navigate(R.id.action_loginFragment_to_profileFragment)
+                    view.findNavController().navigate(R.id.action_loginFragment_to_profileFragment)
                 }
             }
         }
@@ -62,11 +58,4 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         ).show()
     }
 
-    private fun showMessage(msgId: String) {
-        Snackbar.make(
-            requireView(),
-            msgId,
-            Snackbar.LENGTH_LONG
-        ).show()
-    }
 }

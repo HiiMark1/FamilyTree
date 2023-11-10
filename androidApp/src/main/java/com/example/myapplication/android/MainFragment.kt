@@ -3,7 +3,6 @@ package com.example.myapplication.android
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.example.myapplication.android.databinding.FragmentMainBinding
 
 class MainFragment: Fragment(R.layout.fragment_main) {

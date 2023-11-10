@@ -42,8 +42,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             }
 
             btnBackToLogin.setOnClickListener {
-                view?.findNavController()
-                    ?.navigate(R.id.action_registrationFragment_to_loginFragment)
+                view.findNavController()
+                    .navigate(R.id.action_registrationFragment_to_loginFragment)
             }
         }
     }
